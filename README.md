@@ -2,34 +2,17 @@
 
 This is a TypeScript project implementing clean architecture principles.
 
-## Project Structure
+# Ordering Mircroservice
 
-- `src/`: Source code
-  - `application/`: Application layer (use cases, ports)
-  - `domain/`: Domain layer (entities, events, value objects)
-  - `infrastructure/`: Infrastructure layer (adapters, HTTP, persistence)
-  - `shared/`: Shared utilities (e.g., health checks)
-- `test/`: Unit tests
-- `main.ts`: Entry point
-- `tsconfig.json`: TypeScript configuration
-- `vitest.config.ts`: Vitest test configuration
-- `package.json`: Dependencies and scripts
+- **Domain**: Order, Price, SKU, Quantity, Domain Events
+- **Application**: use cases CreateOrder, AddItemToOrder, Ports and DTOs.
+- **Infrastructure**: repository InMemory, static pricing, event bus no-op.
+- **HTTP**: minimal endpoints with Fastify.
+- **Composition**: container.ts as composition-root.
+- **Tests**: domain + acceptance of use cases.
 
-## Setup
+## Behaviour
 
-1. Install dependencies: `npm install`
-2. Run tests: `npm test`
-3. Build: `npm run build` (if added)
-4. Start: `npm run dev`
-
-## Features Implemented
-
-- Basic health check function in `src/shared/health.ts`
-- Unit test for health check in `test/shared/health.spec.ts`
-- TypeScript configuration with path aliases
-- Vitest for testing
-
-## Development
-
-- Use `npm test` to run tests.
-- The project uses Vitest for testing and TypeScript for type safety.
+- `POST/orders` create an order
+- `POST/orders/:orderId/items` adds a line(SKU + qty) with actual price.
+- `Returns the total price of the order`
